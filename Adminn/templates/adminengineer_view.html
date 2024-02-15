@@ -1,0 +1,88 @@
+{% extends 'index.html' %}
+{% block content %}
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+              Data table
+            </h3>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Tables</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Engineer table</li>
+              </ol>
+            </nav>
+          </div>
+            <div class="container mt-3 mb-5">
+                <form class="d-flex" method="POST">
+                    {% csrf_token %}
+                    <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Engineer table</h4>
+              <div class="row">
+                <div class="col-12">
+                  <div class="table-responsive">
+                    <table id="order-listing" class="table">
+                      <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Qualification</th>
+                            <th>Experience</th>
+                            <th>Category</th>
+                            <th>Password</th>
+                            <th>Create at</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for i in data %}
+                        <tr>
+
+                            <td>{{i.Name}}</td>
+                            <td>{{i.Email}}</td>
+                            <td>{{i.Phone_number}}</td>
+                            <td>{{i.Qualification}}</td>
+                            <td>{{i.Experience}}</td>
+                            <td>{{i.category}}</td>
+                            <td>{{i.Password}}</td>
+                            <td>{{i.Create_at}}</td>
+                            <td>
+                              <label class="badge badge-info">{{i.Status}}</label>
+                            </td>
+                            <td>
+                                <a href="{% url 'engineerblock' i.id %}"><button class="btn btn-outline-primary">Block</button></a>
+                                <a href="{% url 'engineerunblk' i.id %}"><button class="btn btn-outline-primary">Unblock</button></a>
+                                <a href="{% url 'engineerdelete' i.id %}"><button class="btn btn-outline-primary">Remove</button></a>
+                            </td>
+                        </tr>
+                      {% endfor %}
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <a href="https://www.urbanui.com/" target="_blank">Urbanui</a>. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="far fa-heart text-danger"></i></span>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+
+{% endblock %}

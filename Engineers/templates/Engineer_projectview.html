@@ -1,0 +1,80 @@
+{% extends 'Engineer_home.html' %}
+{% block body %}
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+              Data table
+            </h3>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Tables</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Project table</li>
+              </ol>
+            </nav>
+          </div>
+            <div class="container mt-3 mb-5">
+                <form class="d-flex" method="POST">
+                    {% csrf_token %}
+                    <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Project table</h4>
+              <div class="row">
+                <div class="col-12">
+                  <div class="table-responsive">
+                    <table id="order-listing" class="table">
+                      <thead>
+                        <tr>
+                            <th>Project Title</th>
+                            <th>Project description</th>
+                            <th>Place</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Contact number</th>
+                            <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for i in project %}
+                        <tr>
+
+                            <td>{{i.Project_Title}}</td>
+                            <td>{{i.Project_description}}</td>
+                            <td>{{i.Place}}</td>
+                            <td>{{i.Start_Date}}</td>
+                            <td>{{i.End_Date}}</td>
+                            <td>{{i.Contact_number}}</td>
+                            <td>
+                                <a href="{% url 'addprojectimage' i.id %}"><button class="btn btn-outline-primary">Add Images</button></a>
+                                <a href=""><button class="btn btn-outline-primary">Remove</button></a>
+                            </td>
+                        </tr>
+                      {% endfor %}
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <a href="https://www.urbanui.com/" target="_blank">Urbanui</a>. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="far fa-heart text-danger"></i></span>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+
+
+{% endblock %}

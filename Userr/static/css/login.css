@@ -1,0 +1,151 @@
+*{
+    margin: 0;
+    border: 0;
+    padding: 0;
+    position: static;
+}
+
+.contact{
+    margin: 0;
+    border: 0;
+    height: 37px;
+    width: 100% ;
+    background-color: #363B42;
+    color: #ffffff;
+
+}
+
+
+
+.left{
+
+    background-color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+
+
+}
+
+.right{
+    height: 90%;
+    margin-top: 0;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-container {
+
+    max-width: 400px;
+    width: auto fit-content;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: #ffffff;
+    margin-left: 2px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: auto; /* Center the form on the page */
+    margin-top: 30px;
+    margin-bottom: 20px;
+    align-content: center;
+    justify-content: center;
+}
+
+.login-form {
+
+    width: 50%;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-style: ridge;
+    margin: auto; /* Center the form on the page */
+}
+
+.form-group {
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+
+
+/* .form-control {
+    border-radius: 5px;
+} */
+
+.btn-login {
+    width:50%;
+    margin-left: 25%;
+    text-align: center;
+    color: black;
+    background-color: #ffa62b;
+}
+
+.btn-login:hover {
+    background-color: #FFA62B;
+
+}
+
+.img{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* margin-left: 4px; */
+    width: 100%;
+    height: auto;
+    border-radius: 30px;
+}
+
+.logo{
+    width: 100%;
+    height: auto;
+    background-color: #3d424a;
+
+
+
+}
+
+.email{
+    margin-left: 63%;
+}
+
+/* .colr{
+    color: #FFA62B;
+    text-align: center;
+    margin-left: 20px;
+    font-size: 30px;
+} */
+
+.copyright{
+    background-color: #363B42;
+    height: 34px;
+    color: white;
+    text-align: center;
+
+    /* position: fixed; */
+
+}
+
+.color{
+    color: #FFA62B;
+    text-align: center;
+    margin-left: 20px;
+    margin-top: 5px;
+    font-size: 25px;
+}
+
+a{
+    text-decoration: none;
+}
+
+
+.fa {
+    /* display:inline-block; */
+    font: normal normal normal 14px/2 FontAwesome;
+    /* font-size:inherit; */
+    /* text-rendering:auto; */
+    /* -webkit-font-smoothing:antialiased; */
+    -moz-osx-font-smoothing: grayscale
+}

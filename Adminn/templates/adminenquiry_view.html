@@ -1,0 +1,72 @@
+{% extends 'index.html' %}
+
+{% block content %}
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+              Data table
+            </h3>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Tables</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Review table</li>
+              </ol>
+            </nav>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Review table</h4>
+              <div class="row">
+                <div class="col-12">
+                  <div class="table-responsive">
+                    <table id="order-listing" class="table">
+                      <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Location</th>
+                            <th>Purpose</th>
+                            <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for i in formm %}
+                        <tr>
+
+                            <td>{{i.Name}}</td>
+                            <td>{{i.Address}}</td>
+                            <td>{{i.Email}}</td>
+                            <td>{{i.Phone}}</td>
+                            <td>{{i.Location}}</td>
+                            <td>{{i.Purpose}}</td>
+                            <td>
+                                <a href="{% url 'enquiry_delete' i.id %}"><button class="btn btn-outline-primary">Remove</button></a>
+                            </td>
+                        </tr>
+                      {% endfor %}
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <a href="https://www.urbanui.com/" target="_blank">Urbanui</a>. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="far fa-heart text-danger"></i></span>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'index.html' %}
+{% block content %}
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+              Category table
+            </h3>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Tables</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Category table</li>
+              </ol>
+            </nav>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Categort table</h4>
+              <div class="row">
+                <div class="col-12">
+                  <div class="table-responsive">
+                    <table id="order-listing" class="table">
+                      <thead>
+                        <tr>
+
+                            <th>Category Name</th>
+
+                            <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for i in formm %}
+                        <tr>
+
+                            <td>{{i.Name}}</td>
+
+                            <td>
+                                <a href="{% url 'categorydelete' i.id %}"><button class="btn btn-outline-primary">Remove</button></a>
+                            </td>
+                        </tr>
+                      {% endfor %}
+
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            <br>
+            <a href="{% url 'addcategory' %}"><button class="btn btn btn-primary">Add New Category</button></a>
+        </div>
+
+
+{% endblock %}
