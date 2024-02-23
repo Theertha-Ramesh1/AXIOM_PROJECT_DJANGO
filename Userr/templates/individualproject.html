@@ -99,12 +99,17 @@
                         </div><br>
                         <h3 class=" text-black">{{i.Project_Title}}</h3>
                         <h5 class=" text-black">Constructed by {{i.engineer}}</h5>
-                        <p class="text-black">{{i.Project_description}}</p>
+                        <p class=" text-black">{{i.Project_description}}</p>
                         <h6 class=" text-black"><span style="color:#6C6A6A">Place:</span> {{i.Place}}</h6>
                         <h6 class=" text-black"><span style="color:#6C6A6A">Start Date:</span> {{i.Start_Date}}</h6>
                         <h6 class=" text-black"><span style="color:#6C6A6A">End Date:</span> {{i.End_Date}}</h6>
                         <h6 class=" text-black"><span style="color:#6C6A6A">Contact:</span> {{i.Contact_number}}</h6>
-                        <button class="btn btn-primary"  type="submit">Favorite <i class="fa fa-bookmark"></i></button>
+                        <div class="row d-flex ">
+                            <button class="btn btn-primary col-6"  type="submit">Favorite <i class="fa fa-bookmark"></i></button>
+                            <button class="btn btn-primary  align-items-center col-6 "  type="submit"><a href="/individualproject/reviewadd/{{i.id}}" style="text-decoration: none; color:white;" >Add a Rating <i class="fa-regular fa-star"></i></a></button>
+
+                        </div>
+
                     </form>
                     {% endfor %}
                 </div>
@@ -124,15 +129,17 @@
         </div>
     </div>
 
-    <div class="review mb-4" style=" width: 30%; background: white; padding: 35px 30px 30px 30px !important; border: 1px solid black; border-radius: 20px; margin: 1 auto; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <div class="review mb-4" style="width: 30%; background: white; padding: 35px 30px 30px 30px !important; border: 1px solid black; border-radius: 20px; margin: 1 auto; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
         {% if review %}
             {% for i in review %}
-            <h3>{{i.user.Name}}</h3>
-            <p><b style="color: #FFA62B; font-weight: 30px;">""</b> {{i.Review}} <b style="color: #FFA62B;">""</b></p>
+            <h3 style="color: #FFA62B;">{{i.user.Name}}</h3>
+            <h6>" {{i.Review}} "</h6>
+            <p class="ml-2">{{i.Rating}}</p>
             {% endfor %}
         {% else %}
         <h3>No Review</h3>
         {% endif %}
+
     </div>
 
 

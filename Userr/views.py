@@ -87,7 +87,7 @@ def home(request):
     if 'user' in request.session:
         recently_visited = request.session.get('recently_visited', [])
         print(recently_visited)
-        recent_project = Engineerproject.objects.filter(id__in=recently_visited)[2:]
+        recent_project = Engineerproject.objects.filter(id__in=recently_visited)
         mobile = request.session['user']
         user = User.objects.filter(Mobile=mobile)
         engineer = Engineer.objects.all()[:4]
@@ -149,7 +149,6 @@ def individualproject(request,id):
             user_id = User.objects.get(id=id)
             data = Wishlist(project=project_id,user=user_id)
             data.save()
-
         # user = ImageUser.objects.filter(user_id=)
         return render(request, 'individualproject.html', {'projecttt': projecttt, 'projimg': projimg, 'review': review})
 
@@ -172,8 +171,18 @@ def individualprofile(request,id):
 
 
 
-def contactengineer(request):
-    return render(request,'contactengineer.html')
+def reviewadd(request,id):
+    if 'user' in request.session:
+        us= User.objects.get(Mobile=request.session['user'])
+        proj = Engineerproject.objects.get(id=id)
+        if request.method == "POST":
+            review = request.POST.get('review')
+            rating = request.POST.get('rating')
+            reviewadd = Review(Review=review,Rating=rating,Project=proj,user=us)
+            reviewadd.save()
+            return redirect('project')
+        return render(request,'reviewadd.html')
+
 
 def enquiry(request):
     if 'user' in request.session:
@@ -191,10 +200,6 @@ def enquiry(request):
             data = Admin_UserEnquiry(Name=name,Address=address,Email=email,Phone=phone,Location=location,Purpose=purpose)
             data.save()
         return render(request,'enquiry.html')
-
-
-
-
 
 
 def plans(request):

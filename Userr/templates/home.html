@@ -233,16 +233,16 @@
     <div class="row d-flex project pt-3 ">
         <h1 class="text-center ">RECENTLY VISITED PROJECTS</h1>
 
-        {% for i in recently_visited %}
+        {% for x in recently_visited %}
 
             <div class=" mt-3 card bg-dark text-white col-md-3 col-lg-3 col-sm-6 "  style="width: 300px; height: 200px;">
 <!--                <img src="{% static 'image/3767053756m2.jpeg' %}" class="card-img" alt="Background Image" >-->
-                <a href="{% url 'individualproject' i.id %}" style="text-decoration: none; color: white;">
-                    <img src="{{ i.projectimage_set.first.ProjectImg.url}}" style="width: 275px; height: 195px;" class="pt-1 card-img" alt="Background Image" >
+                <a href="{% url 'individualproject' x.id %}" style="text-decoration: none; color: white;">
+                    <img src="{{ x.projectimage_set.first.ProjectImg.url}}" style="width: 275px; height: 195px;" class="pt-1 card-img" alt="Background Image" >
                     <div class="card-img-overlay text-lg-left " style="color: white;">
-                      <h5 class="card-title">{{i.Project_Title}}</h5>
-                      <h6>{{i.Place}}</h6>
-                      <p class="card-text">Constructed by {{i.engineer}}</p>
+                      <h5 class="card-title">{{x.Project_Title}}</h5>
+                      <h6>{{x.Place}}</h6>
+                      <p class="card-text">Constructed by {{x.engineer}}</p>
                     </div>
                 </a>
             </div>
