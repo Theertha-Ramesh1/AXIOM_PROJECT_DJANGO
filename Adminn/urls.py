@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.admin_login, name='adminlogin'),
-    path('axiom-admin',views.axiom_admin, name='adminhome'),
+    path('axiomadmin/',views.axiom_admin, name='adminhome'),
     path('adminlogout', views.admin_logout, name='adminlogout'),
     path('addcategory/',views.addcategory,name='addcategory'),
     path('admincategoryview', views.admincategory_view, name='categoryview'),

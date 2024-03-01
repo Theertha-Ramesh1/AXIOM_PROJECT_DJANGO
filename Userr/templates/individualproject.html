@@ -67,6 +67,9 @@
                     <li class="nav-item">
                         <a href="{% url 'plans' %}" class="nav-link text-white ">Plans</a>
                     </li>
+                    <li class="">
+                        <a href="{% url 'wishlist' %}" class="nav-link text-white "><i class="fa-regular fa-heart" style="margin-top:15px;"></i></a>
+                    </li>
 <!--                    <li class="nav-item">-->
 <!--                        <a href="" class="nav-link text-white ">Contact</a>-->
 <!--                    </li>-->
@@ -98,15 +101,15 @@
                             <img src="{{ i.projectimage_set.first.ProjectImg.url }}" style="width: 275px;height: 194px;" class="pt-1 card-img img-responsive" alt="Background Image" >
                         </div><br>
                         <h3 class=" text-black">{{i.Project_Title}}</h3>
-                        <h5 class=" text-black">Constructed by {{i.engineer}}</h5>
                         <p class=" text-black">{{i.Project_description}}</p>
+                        <h5 class=" text-black">Constructed by {{i.engineer}}</h5>
                         <h6 class=" text-black"><span style="color:#6C6A6A">Place:</span> {{i.Place}}</h6>
                         <h6 class=" text-black"><span style="color:#6C6A6A">Start Date:</span> {{i.Start_Date}}</h6>
                         <h6 class=" text-black"><span style="color:#6C6A6A">End Date:</span> {{i.End_Date}}</h6>
                         <h6 class=" text-black"><span style="color:#6C6A6A">Contact:</span> {{i.Contact_number}}</h6>
                         <div class="row d-flex ">
-                            <button class="btn btn-primary col-6"  type="submit">Favorite <i class="fa fa-bookmark"></i></button>
-                            <button class="btn btn-primary  align-items-center col-6 "  type="submit"><a href="/individualproject/reviewadd/{{i.id}}" style="text-decoration: none; color:white;" >Add a Rating <i class="fa-regular fa-star"></i></a></button>
+                            <button class="btn btn-primary col-3" style="margin-right: 0; width:50%;"  type="submit" >Favorite <i class="fa fa-bookmark"></i></button>
+                            <button class="btn btn-primary  align-items-center col-3 ml-2" style="width:50%;" type="submit"><a href="/individualproject/reviewadd/{{i.id}}" style="text-decoration: none; color:white;" >Add a Rating <i class="fa-regular fa-star"></i></a></button>
 
                         </div>
 

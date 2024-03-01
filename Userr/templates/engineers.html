@@ -14,7 +14,45 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4.5rem;
+        margin-left: 250px;
+    }
+
+    .card {
+        flex: 1 1 30%;
+        max-width: 16rem;
+        box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+        border-radius: .5rem;
+        border: .1rem solid rgba(0, 0, 0, .1);
+        overflow: hidden;
+        height: 29rem;
+    }
+    @media (max-width: 768px) {
+        .card {
+            flex: 1 1 calc(50% - 1.5rem);
+        }
+    }
+
+    @media (max-width: 576px) {
+        .card {
+            flex: 1 1 100%;
+        }
+    }
+            .card {
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+    </style>
 </head>
+
 
 <body>
 <div class="container-fluid ">
@@ -63,6 +101,9 @@
                     <li class="nav-item">
                         <a href="{% url 'plans' %}" class="nav-link text-white ">Plans</a>
                     </li>
+                    <li class="">
+                        <a href="{% url 'wishlist' %}" class="nav-link text-white "><i class="fa-regular fa-heart" style="margin-top:15px;"></i></a>
+                    </li>
 <!--                    <li class="nav-item">-->
 <!--                        <a href="" class="nav-link text-white ">Contact</a>-->
 <!--                    </li>-->
@@ -108,20 +149,22 @@
 
     <div class="row d-flex engineer ">
         <h4 class="text-center colo">Team & Staffs</h4>
-        <h1 class="text-center">Qualified Engineers</h1><br>
+        <h1 class="text-center mb-5">Qualified Engineers</h1><br>
         <br><br>
-        {% for i in engineerdata %}
-        <div class="card col-lg-3 col-md-3 col-sm-6 " style="width:250px  ">
-            <a href="{% url 'individualprofile' i.id %}" style="text-decoration: none;">
-                <img class="card-img-top" src="{{ i.Image.url }}" alt="Card image">
-                <div class="card-body text-black">
-                  <h4 class="card-title">{{i.Name}}</h4>
-                  <p class="card-text"> {{i.category}}</p>
-                  <p class="card-text"> {{i.Experience}}</p>
-                </div>
-            </a>
+        <div class="card-container">
+            {% for i in engineerdata %}
+            <div class="card" >
+                <a href="{% url 'individualprofile' i.id %}" style="text-decoration: none;">
+                    <img class="card-img-top" src="{{ i.Image.url }}" alt="Card image">
+                    <div class="card-body text-black">
+                      <h4 class="card-title">{{i.Name}}</h4>
+                      <p class="card-text"> {{i.category}}</p>
+                      <p class="card-text"> {{i.Experience}}</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 
 

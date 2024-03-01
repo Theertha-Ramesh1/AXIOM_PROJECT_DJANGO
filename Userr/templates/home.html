@@ -210,7 +210,7 @@
         <h1 class="text-center">Qualified Engineers</h1><br>
         <br><br>
         {% for i in engineer %}
-        <div class="card col-lg-3 col-md-3 col-sm-6 " style="width:250px  ">
+        <div class="card col-lg-3 col-md-3 col-sm-6 " style="width:250px; height:444px;">
             <a href="{% url 'individualprofile' i.id %}" style="text-decoration: none; ">
                 <img class="card-img-top" src="{{ i.Image.url }}" alt="Card image">
                 <div class="card-body">

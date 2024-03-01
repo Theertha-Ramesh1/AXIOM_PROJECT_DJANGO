@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from Engineers .models import *
 from Userr .models import *
+from django.conf import settings
 from Adminn.models import *
 from django.db.models import Q
 
@@ -40,28 +41,53 @@ def signup(request):
     else:
         return render(request, 'signup.html', {'mobile_exists': False})
 
+# without session timeout
+
+# def login(request):
+#     print("login")
+#     if 'user' in request.session:
+#         return redirect('home')
+#     else:
+#         if request.method == 'POST':
+#             print("POST")
+#             mobile = request.POST.get('mobile')
+#             # email= request.POST.get('email')
+#             password = request.POST.get('password')
+#             check_user = User.objects.filter(Mobile=mobile,Password=password)
+#             if check_user:
+#                 request.session['user'] = mobile
+#                 return redirect('home')
+#             else:
+#                 print("KKK")
+#                 return render(request, 'login.html', {'user': 'false'})
+#     return render(request, 'login.html', {'user': 'null'})
+#
 
 def login(request):
     print("login")
+
+    # Set session timeout to 2 days (in seconds)
+    session_timeout = getattr(settings, 'SESSION_COOKIE_AGE', 400)
+
     if 'user' in request.session:
         return redirect('home')
     else:
         if request.method == 'POST':
             print("POST")
             mobile = request.POST.get('mobile')
-            # email= request.POST.get('email')
             password = request.POST.get('password')
-            check_user = User.objects.filter(Mobile=mobile,Password=password)
+            check_user = User.objects.filter(Mobile=mobile, Password=password)
+
             if check_user:
+                # Set session timeout dynamically
+                request.session.set_expiry(session_timeout)
+
                 request.session['user'] = mobile
                 return redirect('home')
             else:
                 print("KKK")
                 return render(request, 'login.html', {'user': 'false'})
     return render(request, 'login.html', {'user': 'null'})
-
-
-
 
 
 
@@ -85,20 +111,20 @@ def profileedit(request):
 
 def home(request):
     if 'user' in request.session:
-        recently_visited = request.session.get('recently_visited', [])
-        print(recently_visited)
-        recent_project = Engineerproject.objects.filter(id__in=recently_visited)
         mobile = request.session['user']
         user = User.objects.filter(Mobile=mobile)
         engineer = Engineer.objects.all()[:4]
         proje = Engineerproject.objects.all()[:4]
         imag = ProjectImage.objects.filter()[:4]
-        # recently_visited = request.session.get('user', [])
+
+        # recently viewed projects
+        recently_visited = request.session.get('recently_visited', [])
+        print(recently_visited)
+        recent_project = Engineerproject.objects.filter(id__in=recently_visited)
         project = request.session.get('project',0)
         project= int(project)
         project= project+1
         request.session['project'] = project
-
 
         return render(request, 'home.html', {'user': user, 'engineer': engineer, 'proje': proje, 'imag': imag, 'recently_visited': recent_project})
     else:
@@ -118,10 +144,7 @@ def project(request):
             # print(project_id)
             search = request.POST.get('search')
             proect = Engineerproject.objects.filter(Q(Project_Title__icontains=search) | Q(Project_description__icontains=search) | Q(Place__icontains=search) | Q(Contact_number__icontains=search))
-        # else:
-        #     recently_visited = request.session.get('user',[])
-        #     recently_visited.insert(0,id)
-        #     request.session['user'] = recently_visited
+
 
         return render(request, 'project.html', {'projet': proect})
 
@@ -138,18 +161,19 @@ def wishlist(request):
 def individualproject(request,id):
     if 'user' in request.session:
         engineer_prjt_obj = Engineerproject.objects.get(id=id)
-        recently_visited = request.session.get('recently_visited',[])
+        recently_visited = request.session.get('recently_visited',[id])
         recently_visited.insert(0,id)
+        print(recently_visited)
         request.session['recently_visited'] = recently_visited
         projimg = ProjectImage.objects.filter(Project=id)
         projecttt = Engineerproject.objects.filter(id=id)
         review = Review.objects.filter(Project=engineer_prjt_obj)
         if request.method == 'POST':
+            usersection = request.session['user']
             project_id = Engineerproject.objects.get(id=id)
-            user_id = User.objects.get(id=id)
+            user_id = User.objects.get(Mobile=usersection)
             data = Wishlist(project=project_id,user=user_id)
             data.save()
-        # user = ImageUser.objects.filter(user_id=)
         return render(request, 'individualproject.html', {'projecttt': projecttt, 'projimg': projimg, 'review': review})
 
 def individualprofile(request,id):
@@ -157,7 +181,7 @@ def individualprofile(request,id):
         eng = Engineer.objects.get(id=id)
         engineer = Engineer.objects.filter(id=id)
         projet = Engineerproject.objects.filter(engineer=Engineer.objects.get(id=id))
-        context = {'aboutengineer': engineer, 'projet': projet}
+        context ={'aboutengineer': engineer, 'projet': projet}
         if request.method == "POST":
             name = request.POST.get('name')
             email = request.POST.get('email')
@@ -197,14 +221,13 @@ def enquiry(request):
             phone = request.POST.get('phone')
             location = request.POST.get('location')
             purpose = request.POST.get('purpose')
-            data = Admin_UserEnquiry(Name=name,Address=address,Email=email,Phone=phone,Location=location,Purpose=purpose)
+            data = Admin_UserEnquiry(Name=name,Address=address,Email=email,Phone= phone,Location=location,Purpose=purpose)
             data.save()
         return render(request,'enquiry.html')
 
 
 def plans(request):
     return render(request,'plans.html')
-
 
 def logout(request):
     try:
