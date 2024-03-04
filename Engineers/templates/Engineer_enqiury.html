@@ -30,28 +30,28 @@
                     <table id="order-listing" class="table">
                       <thead>
                         <tr>
-                            <th>Project Title</th>
-                            <th>Project description</th>
-                            <th>Place</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Contact number</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Address</th>
+                            <th>Location</th>
+                            <th>Purpose</th>
                             <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
-                      {% for i in project %}
+                      {% for i in enquiry %}
                         <tr>
 
-                            <td>{{i.Project_Title}}</td>
-                            <td>{{i.Project_description}}</td>
-                            <td>{{i.Place}}</td>
-                            <td>{{i.Start_Date}}</td>
-                            <td>{{i.End_Date}}</td>
-                            <td>{{i.Contact_number}}</td>
+                            <td>{{i.name}}</td>
+                            <td>{{i.email}}</td>
+                            <td>{{i.phone_number}}</td>
+                            <td>{{i.address}}</td>
+                            <td>{{i.location}}</td>
+                            <td>{{i.purpose}}</td>
                             <td>
-                                <a href="{% url 'addprojectimage' i.id %}"><button class="btn btn-outline-primary">Add Images</button></a>
-                                <a href="{% url 'engineerprojectdelete' i.id %}"><button class="btn btn-outline-primary">Remove</button></a>
+
+                                <a href="{% url 'enquirydelete' i.id %}"><button class="btn btn-outline-primary">Remove</button></a>
                             </td>
                         </tr>
                       {% endfor %}

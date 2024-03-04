@@ -15,6 +15,7 @@ urlpatterns = [
     path('individualprofile/<int:id>', views.individualprofile, name='individualprofile'),
     path('individualproject/reviewadd/<int:id>', views.reviewadd, name='reviewadd'),
     path('wishlist/', views.wishlist, name='wishlist'),
+    path('wishlistdelete/<int:pk>',views.wishlistdelete,name='wishlistdelete'),
     path('plans/', views.plans, name='plans'),
     path('enquiry/', views.enquiry, name='enquiry'),
     # path('get_engineers/', views.get_engineers, name='get_engineers'),

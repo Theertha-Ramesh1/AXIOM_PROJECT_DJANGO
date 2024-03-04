@@ -13,7 +13,7 @@ def index(request):
         return redirect('Engineer_login')
 
 
-def signupp(request):
+def engineersignupp(request):
     if request.method == "POST":
         name = request.POST.get('name')
         mobile = request.POST.get('mobile')
@@ -151,12 +151,30 @@ def engi_projectview(request):
         return render(request,'Engineer_projectview.html',{'project':project})
 
 
-# def projectdelete(request):
+def engineerprojectdelete(request,id):
+    if 'engineer_user' in request.session:
+        form = Engineerproject.objects.get(id= id)
+        form.delete()
+        return redirect(engi_projectview)
 
 
 
 
 
+# ================================================================
+def enuiryview(request):
+    user = request.session['engineer_user']
+    enginee = Engineer.objects.filter(Phone_number=user).first()
+    if enginee:
+        enquiry = Engineer_contact_enquiryy.objects.filter(eng=enginee)
+
+    return render(request,'Engineer_enqiury.html',{'enquiry':enquiry})
+
+def engineerenuirydelete(request,id):
+    if 'engineer_user' in request.session:
+        form = Engineer_contact_enquiryy.objects.get(id= id)
+        form.delete()
+        return redirect(enuiryview)
 
 
 

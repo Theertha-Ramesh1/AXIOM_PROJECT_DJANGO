@@ -135,3 +135,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SESSION_COOKIE_AGE = 172800
 # SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+
+# settings.py
+
+# TWILIO_ACCOUNT_SID = 'SKf078848e7a1a7ee029b11788dbf4dc81'
+# TWILIO_AUTH_TOKEN = 'zc10prwTfO5Z9jetm1ZbNQ4jWV6UxLef'
+# TWILIO_PHONE_NUMBER = '+91 6238330938'  # This is the Twilio phone number you purchased

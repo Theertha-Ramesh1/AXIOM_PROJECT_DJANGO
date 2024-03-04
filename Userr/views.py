@@ -1,3 +1,5 @@
+
+
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from Engineers .models import *
@@ -107,7 +109,9 @@ def profileedit(request):
             userdata.Email = email
             userdata.Password = password
             userdata.save()
-        return render(request, 'editprofile.html', {'data': data})
+            return redirect('home')
+        else:
+            return render(request, 'editprofile.html', {'data': data})
 
 def home(request):
     if 'user' in request.session:
@@ -157,13 +161,20 @@ def wishlist(request):
         print(wishlist.values())
     return render(request,'wishlist.html',{'wishlist':wishlist})
 
+def wishlistdelete(request,pk):
+    project = Wishlist.objects.filter(id=pk).first()
+    project.delete()
+    return redirect('wishlist')
+
+
+
 
 def individualproject(request,id):
     if 'user' in request.session:
         engineer_prjt_obj = Engineerproject.objects.get(id=id)
-        recently_visited = request.session.get('recently_visited',[id])
+        recently_visited = request.session.get('recently_visited',[])
         recently_visited.insert(0,id)
-        print(recently_visited)
+        print("uh",recently_visited)
         request.session['recently_visited'] = recently_visited
         projimg = ProjectImage.objects.filter(Project=id)
         projecttt = Engineerproject.objects.filter(id=id)
@@ -174,6 +185,7 @@ def individualproject(request,id):
             user_id = User.objects.get(Mobile=usersection)
             data = Wishlist(project=project_id,user=user_id)
             data.save()
+            return redirect('wishlist')
         return render(request, 'individualproject.html', {'projecttt': projecttt, 'projimg': projimg, 'review': review})
 
 def individualprofile(request,id):
@@ -204,7 +216,6 @@ def reviewadd(request,id):
             rating = request.POST.get('rating')
             reviewadd = Review(Review=review,Rating=rating,Project=proj,user=us)
             reviewadd.save()
-            return redirect('project')
         return render(request,'reviewadd.html')
 
 

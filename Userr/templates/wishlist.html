@@ -112,17 +112,16 @@
 <!--                <img src="{% static 'image/3767053756m2.jpeg' %}" class="card-img" alt="Background Image" >-->
                 <a href="{% url 'individualproject' i.id %}" style="text-decoration: none; color: white;">
                     <img src="{{ i.project.projectimage_set.first.ProjectImg.url }}" style="width: 310px; height: 195px;" class=" pl-1 pt-1 card-img img-responsive" alt="Background Image" >
+                    <br><a href="{% url 'wishlistdelete' i.pk %}"><button type="submit" class="btn btn-primary">Delete</button></a>
                     <div class="card-img-overlay text-lg-left ">
                         <h4 class="card-title">{{i.project.Project_Title}}</h4>
                         <h6>{{i.project.Place}}</h6>
                         <h5 class="card-text">Constructed by {{i.project.engineer}}</h5>
                     </div>
                 </a>
-            </div> <br>
+            </div>
             {% endfor %}
         </div>
-
-
 
     </div>
 
